@@ -17,8 +17,8 @@ env:
 
 before_install:
 - echo "Testing Docker Hub credentials"
-- echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin | more;then echo "Login successfull"; else echo "Login failed"; fi
-#- echo "Docker Hub credentials are working"
+- echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin | more
+- echo "Docker Hub credentials are working"
 - echo ${REMOTE_REPO}
 - echo ${DOCKER_USERNAME}
 - docker build -t $REG .
