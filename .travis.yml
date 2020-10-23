@@ -16,7 +16,7 @@ env:
 before_install:
 - echo "Testing Docker Hub credentials"
 - if [ echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin ]; then echo -e "Docker Hub credentials are working"; else echo -e "Login failed"; fi
-- docker build -t ${REG} .
+- docker build -t "${REG}" .
 
 script:
 - echo -e "\n\n Hello \n\n"
@@ -30,10 +30,10 @@ after_success:
 - echo "${TAG}"
 - echo "${REG}"
 - docker build -f Dockerfile -t ${REG}:${TRAVIS_COMMIT} .
-- docker tag ${REG}:${TRAVIS_COMMIT} ${REMOTE_REPO}:latest
-- docker tag ${REG}:${TRAVIS_COMMIT} ${REG}:travis-${TRAVIS_BUILD_NUMBER}
-- docker push ${REG}:travis-${TRAVIS_BUILD_NUMBER}
-- docker run -ti ${REG}:latest
+- docker tag "${REG}":"${TRAVIS_COMMIT}" "${REMOTE_REPO}:latest"
+- docker tag "${REG}":"${TRAVIS_COMMIT}" "${REG}":travis-"${TRAVIS_BUILD_NUMBER}"
+- docker push "${REG}":travis-"${TRAVIS_BUILD_NUMBER}"
+- docker run -ti "${REG}":latest
 - docker ps -a
 -
 notifications:
@@ -46,4 +46,3 @@ notifications:
       - "Build details: %{build_url}"
     on_success: always # default: always
     on_failure: always # default: always
-    
