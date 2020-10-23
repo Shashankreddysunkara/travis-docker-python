@@ -10,5 +10,4 @@ RUN apt-get update && apt-get install -y cron
 #ADD . /code
 #WORKDIR /code
 # Requirements installation
-RUN pip install
 CMD ["python", "-c", "print(12345)"]
