@@ -1,17 +1,16 @@
 language: python
 dist: bionic
 os: linux
-
 services:
 - docker
-
 env:
   global:
   - REPO=travis-docker-pyhton
   - REMOTE_REPO=travis-docker-pyhton
   - REG=${DOCKER_USERNAME}/${REMOTE_REPO}
-  - TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
-  - secure: c+0SaNnJlfjSQzfUZtg3RVwl64YGVvulwjgeAuozNyXQ2tcaLpakJzSqKCq+ovnkWfQFYKK3KntWkPd5j49cvYL+dglbvnJWrkW81UbLCvi2lI3q3980PgdZ4GY2sQgORcHzGEp5FqBgwJXSIcaQSfQZPg5Bc0D13t+LKNbdv9SFRsv88IPkXWg+FQxm16RFJorpXZQmqRaQCUCHYuYyJbL+tZxWkzDQAblri0B2mfy+ZTKd1yMVKCaele1tak622b7qbI30/yVV3mJmLBiDX2ENk+Cz8dWfSVNQXLHSGrMeDfj2dZFVbsicURTI6VVrADBFdmjJAmaCIwcCJFawv2AsRBEzeN3P1nsiU9uGWoBpN4u2Vu8/ZxdSd6BbvDEHuNC99EsGvBlaXovauOM+x8CkgwX6dxE1YImB/tZ3P0OcJ75TV42DrDgWp0ydr5R4BvP2MjJ/OJ0/uRNqmrQidPPfQc/2VVyFQ+HQ7wdZ/898LSmXm93Hn3zIIHpkQkEYZK7WkXMVDaXzs/nO5cd13HvYUaOn9eFERfAT7D08lsHvU7PfvBfrnUshk58rFaoC2C/OXicYsoCsSChUAe+VQ7Hbr0+VDZVZC7LDwJltLx2BY0nw88sq+dJr5fHDQQK32M6xTx7uMHOXTFNloROsnyNNNjFQcnP31ZZQowS0Pn8=
+  - TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;fi`
+  - secure: misxC3oVqAAWMZxpVE4GR2Jspp/uLvpnCgKiwhMCmiDHr9bdpcU5TdzlvBp91DXHLmA6doNZ2+Uo57kK8RlLm4zQWlQ+hyJilv7SUcR1DTN9qGZVynD012k2Yb3HS0h5OVoSTXuX2o3cF8Szr92MgPEte1+GnaML8TqOhKZluRvloQTZlmKTuqCX0mT2ezjOqRBI9+MjjxxxzEU81N0DVQbp9yEJsD9iS1vc/iqs0mXC8eiwDz7j2SPomr2eo2KiAg82QOtZvppaoHmzYU0b2N4low5dngfTh54JOJNl31Ovl1TyQRF8u5Y6LlWc9EAWGBXcPOpj1IPFbkuP5blaEjXtEuzunqN/J0LXzOvNMNFhEqdgV7AgxEl5mxP4yLpmRSQCUcMxy6md8fP2zUVp9ksytbi+FEpysucAedokUEMZu0kQMrsvSIZFnkcvIUXwpIrWLk+6CoOYazdV0DHFpGWm42BF+RqJZSOea8gmWpG3oeIiLvZGausbf3W0c+VEncCYsQS+tx+zhspjjqvKaIfssull7Dh40/5iXdRpoVVKmuJaejNxN3epXosM/yyBmN2bIrRLfQRJbZiar1xXRySZQQGvpDCm+rqDEww9rDIWsM2EoyCBGadyRfnV+LWb1jRtmuuqUtIzCb2gJZ2EgsErgrpsCyy9uY826ujGv+E=
+  - secure: nIEbAlc/uvHrPNyXQtec7QyUGMTv27PwupDPmO9NS9T2qmSa+4U8sBPHCDADYXBPPIqc4wGaWavPm6wO3qBGkdu0ncanv1ffvFSC20bEvMIgUR2+BW8b0V573+3+1YjEK9zYeA0fEVGrY8VNZFABzj4cQuKAOtT0GmqhBYxEuEPhd468+omJj5yzp725miW1xN/zq0LlRchVPITLDeP9xKdfVVH9iXeD7i6aXlUrL+xObcG9FwRZZo7+eeKox/J3/6DumM4xJQyODQwmGdZIxNUa2/3p9A2imIJs5u3IPW0L8FnZSmmCXDcr7nuie/yKdXil1GydpxSLEaPjR+he4MpuK40clme9Mo0UgmYGhvnQ/jaLW6TMP/MvRN46LBIYKGJOVUVvbSYJ2x/+8ULmPoqql9cvmfbpy0i36WVDOWweUaj4ryceckhF9XS7pY+bncOehZw0qz2uDpV0ljvku8eVPgvKYXVGZCgY4KcQWkXrDglnu0hwuF8tz/cigQVrDOmhaw9AwQn/PuNkSVqs/2PuBZvEb1R2rECZGRiiWePeOZFW12fqPDV7IArqpeJW0wCnDHhmxfnuy0WvD05oA17VNmcVAorqh3U3cIjTDDtItFJFnoyfEDWNigSczTGmTRzQTwMNCK00mPhtzM9FPusQ4N1Jdp7c/1c50UucEAE=
 
 before_install:
 - echo "Testing Docker Hub credentials"
@@ -19,32 +18,29 @@ before_install:
 - echo "Docker Hub credentials are working"
 - echo ${REMOTE_REPO}
 - echo ${DOCKER_USERNAME}
-- docker build -t image .
-
+- docker build -t $REG .
 script:
 - echo -e "\n\n Hello \n\n"
-
 after_success:
 - echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
-- if [[ "${TRAVIS_BRANCH}" == "master" ]]; then echo -e "Push image to Docker Hub"; else echo -e "Cannot push to Docker Hub due to non-master active branch"; fi
+- if [[ "${TRAVIS_BRANCH}" == "master" ]]; then echo -e "Push image to Docker Hub";
+  else echo -e "Cannot push to Docker Hub due to non-master active branch"; fi
 - echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin
 - echo "${REPO}"
 - echo "${TAG}"
-- echo "${REG}"
+- echo $REG
 - docker build -f Dockerfile -t ${REG}:${TRAVIS_COMMIT} .
-- docker tag ${REG}:${TRAVIS_COMMIT} ${REMOTE_REPO}:latest
-- docker tag ${REG}":${TRAVIS_COMMIT} ${REG}:travis-${TRAVIS_BUILD_NUMBER}
-- docker push ${REG}:travis-${TRAVIS_BUILD_NUMBER}
-- docker run -ti "${REG}":latest
+- docker tag $REG:${TRAVIS_COMMIT} $REMOTE_REPO:latest
+- docker tag $REG:${TRAVIS_COMMIT} $REG:travis-${TRAVIS_BUILD_NUMBER}
+- docker push $REG:travis-${TRAVIS_BUILD_NUMBER}
+- docker run -ti "$REG":latest
 - docker ps -a
-
 notifications:
   slack:
     rooms:
-      - secure: dOA/3Ok64FV4SwEC4E3hbChf9bqUQZUCbZs5pvXDl6v+iT5TZCyhJhg355jOK/+jMTMdG5MO024sFjpgAnvMLu51cMyK8ywqYfDBBaNlENCMoXOWVknRiIYl7KgooXcibMMH+1izUynqy+9QUruWLRFOCIeOUC69VnSTAm8+gG6MAhe9khbHc7FdYvhqWM4fJ4WWpmrFwp1QRRCXxdx0B8C+WORa5zcnRUOMIqoieQ84i+4yt/V7lU+w5B5pXZhfgdmumxhvevuIY7E0Q6Ry07wnkdvlcD5NY/4T0hs1Ac78IIld+2mQ7/v4IC+/PCZt8rI0pm+uUWZPXagX3xuxg93XKRnKnmaj5A2orUZ8heoo1Hz34doYxBV3FebZ6Qyfx/oLTQQyyzOfY5Xk29M27bh2D3cpTjZDIJHKkdn4Xzyn6RXmuqp0H3coDhg7smNIHBeyGPTcdmbj5atnslrJGZsbZa7r5tDKzlLk2zSuywKC9iPmAtqmJVCqYNNp6n+LPtMHk+0t1WfOuvspJVh3MF0XHhjTpCk0/B4xE8ZwJr8g6qwcH54WAwKK0eKj4z7HZuhA3bc1igGd+0gubf4PAbclKSlDtvcCjtpLl4LoE69rUGragpPNq9WVzQZN7KibvlMFvWHOWRhXY1K/nlU3t90AbvRP2O//nDnyozpyGBE=
-
+    - secure: dOA/3Ok64FV4SwEC4E3hbChf9bqUQZUCbZs5pvXDl6v+iT5TZCyhJhg355jOK/+jMTMdG5MO024sFjpgAnvMLu51cMyK8ywqYfDBBaNlENCMoXOWVknRiIYl7KgooXcibMMH+1izUynqy+9QUruWLRFOCIeOUC69VnSTAm8+gG6MAhe9khbHc7FdYvhqWM4fJ4WWpmrFwp1QRRCXxdx0B8C+WORa5zcnRUOMIqoieQ84i+4yt/V7lU+w5B5pXZhfgdmumxhvevuIY7E0Q6Ry07wnkdvlcD5NY/4T0hs1Ac78IIld+2mQ7/v4IC+/PCZt8rI0pm+uUWZPXagX3xuxg93XKRnKnmaj5A2orUZ8heoo1Hz34doYxBV3FebZ6Qyfx/oLTQQyyzOfY5Xk29M27bh2D3cpTjZDIJHKkdn4Xzyn6RXmuqp0H3coDhg7smNIHBeyGPTcdmbj5atnslrJGZsbZa7r5tDKzlLk2zSuywKC9iPmAtqmJVCqYNNp6n+LPtMHk+0t1WfOuvspJVh3MF0XHhjTpCk0/B4xE8ZwJr8g6qwcH54WAwKK0eKj4z7HZuhA3bc1igGd+0gubf4PAbclKSlDtvcCjtpLl4LoE69rUGragpPNq9WVzQZN7KibvlMFvWHOWRhXY1K/nlU3t90AbvRP2O//nDnyozpyGBE=
     template:
-      - "%{repository_slug} (%{commit}) : %{message}"
-      - "Build details: %{build_url}"
-    on_success: always # default: always
-    on_failure: always # default: always
+    - "%{repository_slug} (%{commit}) : %{message}"
+    - 'Build details: %{build_url}'
+    on_success: always
+    on_failure: always
