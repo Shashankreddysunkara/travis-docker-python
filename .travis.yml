@@ -32,9 +32,9 @@ after_success:
 - echo "${TAG}"
 - echo "${REG}"
 - docker build -f Dockerfile -t ${REG}:${TRAVIS_COMMIT} .
-- docker tag "${REG}":"${TRAVIS_COMMIT}" "${REMOTE_REPO}:latest"
-- docker tag "${REG}":"${TRAVIS_COMMIT}" "${REG}":travis-"${TRAVIS_BUILD_NUMBER}"
-- docker push "${REG}":travis-"${TRAVIS_BUILD_NUMBER}"
+- docker tag ${REG}:${TRAVIS_COMMIT} ${REMOTE_REPO}:latest
+- docker tag ${REG}":${TRAVIS_COMMIT} ${REG}:travis-${TRAVIS_BUILD_NUMBER}
+- docker push ${REG}:travis-${TRAVIS_BUILD_NUMBER}
 - docker run -ti "${REG}":latest
 - docker ps -a
 
