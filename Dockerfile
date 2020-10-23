@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install -y cron
 #&& echo "* * * * *  /code/manage.py index_deviceprofile >> /var/log/crontab.log 2>&1" >> /etc/crontab \
 #&& crontab /etc/crontab
 ## App setup
-ADD . /code
-WORKDIR /code
+#ADD . /code
+#WORKDIR /code
 # Requirements installation
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install
 CMD ["python", "-c", "print(12345)"]
