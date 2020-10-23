@@ -17,7 +17,7 @@ before_install:
 - echo "Testing Docker Hub credentials"
 - echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin
 - echo "Docker Hub credentials are working"
-- docker build -t `${DOCKER_USERNAME}/${REPOAITORY_2}` .
+- docker build -f Dockerfile -t `${DOCKER_USERNAME}/${REPOAITORY_2}` .
 
 script:
 - echo -e "\n\n Hello \n\n"
@@ -29,7 +29,7 @@ after_success:
 - echo "${REPO}"
 - echo "${TAG}"
 - echo "${REG}"
-- docker build -f Dockerfile -t -e  ${REG}:${TRAVIS_COMMIT} .
+- docker build -f Dockerfile -t ${REG}:${TRAVIS_COMMIT} .
 - docker tag "${REG}":"${TRAVIS_COMMIT}" "${REMOTE_REPO}:latest"
 - docker tag "${REG}":"${TRAVIS_COMMIT}" "${REG}":travis-"${TRAVIS_BUILD_NUMBER}"
 - docker push "${REG}":travis-"${TRAVIS_BUILD_NUMBER}"
