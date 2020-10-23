@@ -15,8 +15,8 @@ env:
 
 before_install:
 - echo "Testing Docker Hub credentials"
-- if [[ echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin ]]; then echo -e "Docker Hub credentials are working"; else echo -e "Login failed"; fi
-- docker build -t $"{REG}" .
+- if [[ echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin ]]; then echo "Docker Hub credentials are working"; else echo "Login failed"; fi
+- docker build -t REG .
 
 script:
 - echo -e "\n\n Hello \n\n"
