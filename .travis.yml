@@ -7,8 +7,6 @@ services:
 #  global:
 #    -DOCKER_REPO=dock101/travis-docker-python
 
-
-
 before_install:
   - echo "Testing Docker Hub credentials"
   - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
