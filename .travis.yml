@@ -1,5 +1,6 @@
 language: python
 dist: bionic
+os: linux
 
 services:
   - docker
@@ -7,16 +8,16 @@ services:
 env:
   global:
     - REPO=travis-docker-python
-    - REG={DOCKER_USERNAME}/{REPO}
+    - REG=${DOCKER_USERNAME}/${REPO}
     - TAG=`if [ "$TRAVIS_BRANCH" == "main" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
 before_install:
   - echo "Testing Docker Hub credentials"
-  - if [[echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin ]];then echo "Docker Hub credentials are working"; else echo "Login failed"; fi
-  - docker build -t ${REPO}\-image .
+  - if [echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin ];then echo "Docker Hub credentials are working"; else echo "Login failed"; fi
+  - docker build -t ${REPO} .
 
 script:
-  - echo "\n\n Hello \n\n"
+  - echo -e "\n\n Hello \n\n"
 
 #deploy:
 #  provider: script
@@ -32,6 +33,7 @@ after_success:
   - echo "$REPO"
 #  - export TAG=`if [ "$TRAVIS_BRANCH" == "main" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - echo "$TAG"
+  - echo "$REG"
   - docker build -f Dockerfile -t $REG:$COMMIT .
   - docker tag ${REG}:${COMMIT} ${REG}:${TAG}
   - docker tag {$REG}:${COMMIT} ${REG}:travis-${TRAVIS_BUILD_NUMBER}
