@@ -9,7 +9,7 @@ env:
   global:
   - REPO=${REPOSITORY_1}
   - REMOTE_REPO=${REPOAITORY_2}
-  - REG=${DOCKER_USERNAME}/env.REMOTE_REPO
+  - REG=${DOCKER_USERNAME}/${REPOAITORY_2}
   - TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
   - secure: c+0SaNnJlfjSQzfUZtg3RVwl64YGVvulwjgeAuozNyXQ2tcaLpakJzSqKCq+ovnkWfQFYKK3KntWkPd5j49cvYL+dglbvnJWrkW81UbLCvi2lI3q3980PgdZ4GY2sQgORcHzGEp5FqBgwJXSIcaQSfQZPg5Bc0D13t+LKNbdv9SFRsv88IPkXWg+FQxm16RFJorpXZQmqRaQCUCHYuYyJbL+tZxWkzDQAblri0B2mfy+ZTKd1yMVKCaele1tak622b7qbI30/yVV3mJmLBiDX2ENk+Cz8dWfSVNQXLHSGrMeDfj2dZFVbsicURTI6VVrADBFdmjJAmaCIwcCJFawv2AsRBEzeN3P1nsiU9uGWoBpN4u2Vu8/ZxdSd6BbvDEHuNC99EsGvBlaXovauOM+x8CkgwX6dxE1YImB/tZ3P0OcJ75TV42DrDgWp0ydr5R4BvP2MjJ/OJ0/uRNqmrQidPPfQc/2VVyFQ+HQ7wdZ/898LSmXm93Hn3zIIHpkQkEYZK7WkXMVDaXzs/nO5cd13HvYUaOn9eFERfAT7D08lsHvU7PfvBfrnUshk58rFaoC2C/OXicYsoCsSChUAe+VQ7Hbr0+VDZVZC7LDwJltLx2BY0nw88sq+dJr5fHDQQK32M6xTx7uMHOXTFNloROsnyNNNjFQcnP31ZZQowS0Pn8=
 
@@ -17,7 +17,7 @@ before_install:
 - echo "Testing Docker Hub credentials"
 - echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin
 - echo "Docker Hub credentials are working"
-- docker build -t $(echo ${REG}) .
+- docker build -t ${DOCKER_USERNAME}/${REPOAITORY_2} .
 
 script:
 - echo -e "\n\n Hello \n\n"
