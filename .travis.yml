@@ -15,8 +15,8 @@ env:
 
 before_install:
 - echo "Testing Docker Hub credentials"
-- if [[ echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin ]]; then echo "Docker Hub credentials are working"; else echo "Login failed"; fi
-- docker build -t REG .
+- if [[ echo -e "${DOCKER_PASSWORD}" | docker login -e -u=${DOCKER_USERNAME} --password-stdin ]]; then echo "Docker Hub credentials are working"; else echo "Login failed"; fi
+- docker build -t -e ${REG} .
 
 script:
 - echo -e "\n\n Hello \n\n"
@@ -25,15 +25,15 @@ script:
 after_success:
 - echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
 - if [[ "${TRAVIS_BRANCH}" == "master" ]]; then echo -e "Push image to Docker Hub"; else echo -e "Cannot push to Docker Hub due to non-master active branch"; fi
-- echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin
-- echo "${REPO}"
+- echo -e "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin
+- echo -e "${REPO}"
 - echo "${TAG}"
 - echo "${REG}"
-- docker build -f Dockerfile -t ${REG}:${TRAVIS_COMMIT} .
-- docker tag "${REG}":"${TRAVIS_COMMIT}" "${REMOTE_REPO}:latest"
-- docker tag "${REG}":"${TRAVIS_COMMIT}" "${REG}":travis-"${TRAVIS_BUILD_NUMBER}"
-- docker push "${REG}":travis-"${TRAVIS_BUILD_NUMBER}"
-- docker run -ti "${REG}":latest
+- docker build -f Dockerfile -t -e  ${REG}:${TRAVIS_COMMIT} .
+- docker tag -e "${REG}":"${TRAVIS_COMMIT}" "${REMOTE_REPO}:latest"
+- docker tag -e "${REG}":"${TRAVIS_COMMIT}" "${REG}":travis-"${TRAVIS_BUILD_NUMBER}"
+- docker push -e "${REG}":travis-"${TRAVIS_BUILD_NUMBER}"
+- docker run -ti -e "${REG}":latest
 - docker ps -a
 -
 notifications:
