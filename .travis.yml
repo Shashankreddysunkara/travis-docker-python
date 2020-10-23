@@ -1,4 +1,5 @@
 language: python
+dist: bionic
 
 services:
   - docker
@@ -7,7 +8,7 @@ services:
 #  global:
 #    -DOCKER_REPO=dock101/travis-docker-python
 
-before_install:
+before_script:
   - echo "Testing Docker Hub credentials"
   - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
   - echo "Docker Hub credentials are working"
@@ -15,7 +16,7 @@ before_install:
 script:
   - docker ps -a
 
-after_success:
+after_script:
   - echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then echo -e "Push image to Docker Hub"; fi
   - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
