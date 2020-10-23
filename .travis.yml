@@ -17,7 +17,7 @@ env:
 
 before_install:
 - echo "Testing Docker Hub credentials"
-- if [[ echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin == "true"]];then echo "Login successfull"; else echo "Login failed"; fi
+- echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin | more;then echo "Login successfull"; else echo "Login failed"; fi
 #- echo "Docker Hub credentials are working"
 - echo ${REMOTE_REPO}
 - echo ${DOCKER_USERNAME}
@@ -29,7 +29,7 @@ script:
 after_success:
 - echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
 - if [[ "${TRAVIS_BRANCH}" == "main" ]]; then echo -e "Push image to Docker Hub"; else echo -e "Cannot push to Docker Hub due to non-main active branch"; fi
-- echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin
+- echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin | more
 - echo "${REPO}"
 - echo "${TAG}"
 - echo $REG
