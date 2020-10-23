@@ -17,7 +17,9 @@ before_install:
 - echo "Testing Docker Hub credentials"
 - echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin
 - echo "Docker Hub credentials are working"
-- docker build -f Dockerfile -t dock101/image .
+- echo ${REMOTE_REPO}
+- echo ${DOCKER_USERNAME}
+- docker build -t image .
 
 script:
 - echo -e "\n\n Hello \n\n"
