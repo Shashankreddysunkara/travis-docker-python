@@ -1,8 +1,10 @@
 language: python
 dist: bionic
 os: linux
+
 services:
 - docker
+
 env:
   global:
   - REPO=travis-docker-pyhton
@@ -26,8 +28,10 @@ before_install:
 - echo ${REMOTE_REPO}
 - echo ${DOCKER_USERNAME}
 - docker build -t $REG .
+
 script:
 - echo -e "\n\n Hello \n\n"
+
 after_success:
 - echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
 - if [[ "${TRAVIS_BRANCH}" == "main" ]]; then echo -e "Push image to Docker Hub";
