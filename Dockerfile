@@ -10,5 +10,5 @@ ENV PYTHONUNBUFFERED 1
 #ADD . /code
 #WORKDIR /code
 # Requirements installation
-RUN echo "Hello From Dockerfile"
+RUN echo "Hello From Dockerfile" > hello.txt
 CMD ["python", "-c", "print(12345)"]
