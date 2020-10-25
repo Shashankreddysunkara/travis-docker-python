@@ -45,7 +45,7 @@ jobs:
       name: Check Docker Login creds
       script:
         - echo "Testing Docker Hub credentials"
-        - echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin | more
+        - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
         - echo "Docker Hub credentials are working"
         - echo ${REMOTE_REPO}
         - echo ${DOCKER_USERNAME}
