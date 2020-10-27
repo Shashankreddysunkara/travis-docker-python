@@ -17,7 +17,7 @@ env:
 install:
   - pip install coveralls tox
 
-script: if [[ -n "$MAKE_TARGET" ]]; then make "$MAKE_TARGET"; else tox; fi
+script: if [[ -n "$MAKE_TARGET" ]]; then echo "$MAKE_TARGET"; else tox; fi
 
 after_success:
 #  - coveralls
@@ -30,7 +30,7 @@ stages:
   - Coverage
   - Deploy
 
-matrix:
+jobs:
   include:
    - stage: Build
      name: Check Docker Login creds
