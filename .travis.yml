@@ -1,99 +1,80 @@
 language: python
 dist: bionic
 os: linux
-
 services:
 - docker
-
 env:
   global:
-  - PRIV_REPO=travis_docker_pyhton_private
-  - REMOTE_REPO=travis-docker-pyhton
-  - REG=${DOCKER_USERNAME}/${REMOTE_REPO}
-  - TAG=`if [ "$TRAVIS_BRANCH" == "main" ]; then echo "latest"; else echo $TRAVIS_BRANCH;fi`
+    - PRIV_REPO=travis_docker_pyhton_private
+    - REMOTE_REPO=travis-docker-pyhton
+    - REG=${DOCKER_USERNAME}/${REMOTE_REPO}
+    - PYPI_USER=${PYPI_USERNAME}
+    - MAKE_TARGET=test
+    - TAG=`if [ "$TRAVIS_BRANCH" == "main" ]; then echo "latest"; else echo $TRAVIS_BRANCH;fi`
+    - secure: misxC3oVqAAWMZxpVE4GR2Jspp/uLvpnCgKiwhMCmiDHr9bdpcU5TdzlvBp91DXHLmA6doNZ2+Uo57kK8RlLm4zQWlQ+hyJilv7SUcR1DTN9qGZVynD012k2Yb3HS0h5OVoSTXuX2o3cF8Szr92MgPEte1+GnaML8TqOhKZluRvloQTZlmKTuqCX0mT2ezjOqRBI9+MjjxxxzEU81N0DVQbp9yEJsD9iS1vc/iqs0mXC8eiwDz7j2SPomr2eo2KiAg82QOtZvppaoHmzYU0b2N4low5dngfTh54JOJNl31Ovl1TyQRF8u5Y6LlWc9EAWGBXcPOpj1IPFbkuP5blaEjXtEuzunqN/J0LXzOvNMNFhEqdgV7AgxEl5mxP4yLpmRSQCUcMxy6md8fP2zUVp9ksytbi+FEpysucAedokUEMZu0kQMrsvSIZFnkcvIUXwpIrWLk+6CoOYazdV0DHFpGWm42BF+RqJZSOea8gmWpG3oeIiLvZGausbf3W0c+VEncCYsQS+tx+zhspjjqvKaIfssull7Dh40/5iXdRpoVVKmuJaejNxN3epXosM/yyBmN2bIrRLfQRJbZiar1xXRySZQQGvpDCm+rqDEww9rDIWsM2EoyCBGadyRfnV+LWb1jRtmuuqUtIzCb2gJZ2EgsErgrpsCyy9uY826ujGv+E=
+    - secure: nIEbAlc/uvHrPNyXQtec7QyUGMTv27PwupDPmO9NS9T2qmSa+4U8sBPHCDADYXBPPIqc4wGaWavPm6wO3qBGkdu0ncanv1ffvFSC20bEvMIgUR2+BW8b0V573+3+1YjEK9zYeA0fEVGrY8VNZFABzj4cQuKAOtT0GmqhBYxEuEPhd468+omJj5yzp725miW1xN/zq0LlRchVPITLDeP9xKdfVVH9iXeD7i6aXlUrL+xObcG9FwRZZo7+eeKox/J3/6DumM4xJQyODQwmGdZIxNUa2/3p9A2imIJs5u3IPW0L8FnZSmmCXDcr7nuie/yKdXil1GydpxSLEaPjR+he4MpuK40clme9Mo0UgmYGhvnQ/jaLW6TMP/MvRN46LBIYKGJOVUVvbSYJ2x/+8ULmPoqql9cvmfbpy0i36WVDOWweUaj4ryceckhF9XS7pY+bncOehZw0qz2uDpV0ljvku8eVPgvKYXVGZCgY4KcQWkXrDglnu0hwuF8tz/cigQVrDOmhaw9AwQn/PuNkSVqs/2PuBZvEb1R2rECZGRiiWePeOZFW12fqPDV7IArqpeJW0wCnDHhmxfnuy0WvD05oA17VNmcVAorqh3U3cIjTDDtItFJFnoyfEDWNigSczTGmTRzQTwMNCK00mPhtzM9FPusQ4N1Jdp7c/1c50UucEAE=
 
-  - secure: misxC3oVqAAWMZxpVE4GR2Jspp/uLvpnCgKiwhMCmiDHr9bdpcU5TdzlvBp91DXHLmA6doNZ2+Uo57kK8RlLm4zQWlQ+hyJilv7SUcR1DTN9qGZVynD012k2Yb3HS0h5OVoSTXuX2o3cF8Szr92MgPEte1+GnaML8TqOhKZluRvloQTZlmKTuqCX0mT2ezjOqRBI9+MjjxxxzEU81N0DVQbp9yEJsD9iS1vc/iqs0mXC8eiwDz7j2SPomr2eo2KiAg82QOtZvppaoHmzYU0b2N4low5dngfTh54JOJNl31Ovl1TyQRF8u5Y6LlWc9EAWGBXcPOpj1IPFbkuP5blaEjXtEuzunqN/J0LXzOvNMNFhEqdgV7AgxEl5mxP4yLpmRSQCUcMxy6md8fP2zUVp9ksytbi+FEpysucAedokUEMZu0kQMrsvSIZFnkcvIUXwpIrWLk+6CoOYazdV0DHFpGWm42BF+RqJZSOea8gmWpG3oeIiLvZGausbf3W0c+VEncCYsQS+tx+zhspjjqvKaIfssull7Dh40/5iXdRpoVVKmuJaejNxN3epXosM/yyBmN2bIrRLfQRJbZiar1xXRySZQQGvpDCm+rqDEww9rDIWsM2EoyCBGadyRfnV+LWb1jRtmuuqUtIzCb2gJZ2EgsErgrpsCyy9uY826ujGv+E=   #DOCKER_USERNAME
+install:
+  - pip install coveralls tox
 
-  - secure: nIEbAlc/uvHrPNyXQtec7QyUGMTv27PwupDPmO9NS9T2qmSa+4U8sBPHCDADYXBPPIqc4wGaWavPm6wO3qBGkdu0ncanv1ffvFSC20bEvMIgUR2+BW8b0V573+3+1YjEK9zYeA0fEVGrY8VNZFABzj4cQuKAOtT0GmqhBYxEuEPhd468+omJj5yzp725miW1xN/zq0LlRchVPITLDeP9xKdfVVH9iXeD7i6aXlUrL+xObcG9FwRZZo7+eeKox/J3/6DumM4xJQyODQwmGdZIxNUa2/3p9A2imIJs5u3IPW0L8FnZSmmCXDcr7nuie/yKdXil1GydpxSLEaPjR+he4MpuK40clme9Mo0UgmYGhvnQ/jaLW6TMP/MvRN46LBIYKGJOVUVvbSYJ2x/+8ULmPoqql9cvmfbpy0i36WVDOWweUaj4ryceckhF9XS7pY+bncOehZw0qz2uDpV0ljvku8eVPgvKYXVGZCgY4KcQWkXrDglnu0hwuF8tz/cigQVrDOmhaw9AwQn/PuNkSVqs/2PuBZvEb1R2rECZGRiiWePeOZFW12fqPDV7IArqpeJW0wCnDHhmxfnuy0WvD05oA17VNmcVAorqh3U3cIjTDDtItFJFnoyfEDWNigSczTGmTRzQTwMNCK00mPhtzM9FPusQ4N1Jdp7c/1c50UucEAE=   #DOCKER_PASSWORD
+script: if [[ -n "$MAKE_TARGET" ]]; then make "$MAKE_TARGET"; else tox; fi
 
-#jobs:
-#  include:
-#    - stage: Build
-#      name: Check Docker Login creds
-#      script:
-#        - echo "Testing Docker Hub credentials"
-##        - echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin | more
-#        - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
-#        - echo "Docker Hub credentials are working"
-#        - echo ${REMOTE_REPO}
-#        - echo ${DOCKER_USERNAME}
-#    - script:
-#        - docker build -t $PRIV_REPO .
-#        - docker images
-#        - docker tag $PRIV_REPO $DOCKER_USERNAME/$PRIV_REPO:travis-${TRAVIS_BUILD_NUMBER}
-#        - docker push $DOCKER_USERNAME/$PRIV_REPO:travis-${TRAVIS_BUILD_NUMBER}
-#      name: Build Docker Image
-#
-#    - stage: Test
-#      name: Test Code
-#      script:
-#        - docker run --rm $DOCKER_USERNAME/$PRIV_REPO:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
+after_success:
+#  - coveralls
+  - if [ "$TRAVIS_BRANCH" == "main" ]; then echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin
+  - if [[ -n %{echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin} ]] ; then echo "Login successfull"; else echo "Login Failed"; fi
 
-jobs:
+stages:
+  - Build
+  - Test
+  - Coverage
+  - Deploy
+
+matrix:
   include:
-    - stage: Build
-      name: Check Docker Login creds
-      script:
-        - echo "Testing Docker Hub credentials"
-        - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
-        - echo "Docker Hub credentials are working"
-        - echo ${REMOTE_REPO}
-        - echo ${DOCKER_USERNAME}
-        - docker build -f Dockerfile -t $REG:${TRAVIS_COMMIT} .
-        - docker images
-        - docker tag $REG:${TRAVIS_COMMIT} $REMOTE_REPO:latest
-        - docker tag $REG:${TRAVIS_COMMIT} $REG:travis-${TRAVIS_BUILD_NUMBER}
-        - docker push $REG:travis-${TRAVIS_BUILD_NUMBER}
-        - docker run -ti $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
-        - docker ps -a
-        - cat /home/travis/.docker/config.json
-    - stage: Test
-      name: Test Code
-      script:
-        - echo "No Scripts included"
-
-#before_install:
-#- echo "Testing Docker Hub credentials"
-#- echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin | more
-#- echo "Docker Hub credentials are working"
-#- echo ${REMOTE_REPO}
-#- echo ${DOCKER_USERNAME}
-#- docker build -t $REG .
-#
-#script:
-#- echo -e "\n\n Hello \n\n"
-#
-#after_success:
-#- echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
-#- if [[ "${TRAVIS_BRANCH}" == "main" ]]; then echo -e "Push image to Docker Hub"; else echo -e "Cannot push to Docker Hub due to non-main active branch"; fi
-#- echo "${DOCKER_PASSWORD}" | docker login -u=${DOCKER_USERNAME} --password-stdin | more
-#- echo "${REPO}"
-#- echo "${TAG}"
-#- echo $REG
-#- docker build -f Dockerfile -t ${REG}:${TRAVIS_COMMIT} .
-#- docker tag $REG:${TRAVIS_COMMIT} $REMOTE_REPO:latest
-#- docker tag $REG:${TRAVIS_COMMIT} $REG:travis-${TRAVIS_BUILD_NUMBER}
-#- docker push $REG:travis-${TRAVIS_BUILD_NUMBER}
-#- docker run -ti "$REG":latest
-#- docker ps -a
-#- cat /home/travis/.docker/config.json
+   - stage: Build
+     name: Check Docker Login creds
+     script:
+#      - echo "Testing Docker Hub credentials"
+#      - echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin
+#      - echo "Docker Hub credentials are working"
+      - echo ${REMOTE_REPO}
+      - echo ${DOCKER_USERNAME}
+      - docker build -f Dockerfile -t $REG:${TRAVIS_COMMIT} .
+      - docker images
+      - docker tag $REG:${TRAVIS_COMMIT} $REMOTE_REPO:latest
+      - docker tag $REG:${TRAVIS_COMMIT} $REG:travis-${TRAVIS_BUILD_NUMBER}
+      - docker push $REG:travis-${TRAVIS_BUILD_NUMBER}
+      - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt #https://docs.travis-ci.com/user/build-stages/share-docker-image/
+      - cat /home/travis/.docker/config.json
+   - stage: Test
+     name: Test Code
+     script:
+      - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
+      - cat /home/travis/.docker/config.json
+      - docker ps -a
+   - stage: Coverage
+     name: Coveralls
+     after_success:
+        - coveralls
+     script: echo "Coverage report sent"
+   - stage: Deploy
+     name: Deploy package to pypi
+     deploy:
+       provider: pypi
+       user: $PYPI_USER
+       password:
+         secure: eBDGAgRkn0uC+jHfvKevoxUgIPf7QF1mdEoNNSLdc2rUkdS+Rz75vRxNfCE1F3ow9/RzS5VnndLHzDsBenRs8aXD7iCbCnjH/M53l78DOi6CXxllR1LE4KTxZlxIe3Kq4EZ6yIjLjS5kx+RzoPAn+o/BPQK/VyScPAz9OkhtSi5fmRnTU4PA+zPzRcv9tDHlgOEbORPdH8uLTZElxyrSEy9BSdB4GXZgJrPfdBSBjk0lR+2Vo6IFYYkKxkCJmujjbHsFoZNDH2YjU3cP1lv8TSYh2FnMfl9po3EVDKirJBIF48PdwtVkD3fjrswyFzQBdBLXoiYIoeFPXLy0dzo9cKobxP/CWESzSJ9U1JILtjsEcuG+wkljZrw51RztQbP5V/7B8ztMohyugi2IA5vEovSrDre1FIUo7EGvAPSwEjpbAmrSibpQmngzIGVDqGGlJy827ODJgAi4OzH0HDgVA2GXKClrgADzECyrq6a3u6mvTOpI/v/uckDEoIfpT1nWanuXp2mKo0bgk3StDfNGSb8bTOKfCBbg6NGsYhnf9XppgfQuQHkpD39JRpmJR0CzbMwOYM5G4+HI4erdS4KR2uIYVWnDh82iadcr3HYdAlPrlcJ0+uW0YLAIXT0Ct47mAYRg/33WWAXR9VqtohQwi2QweZm4dbO/WboIbJAazkE=
+       on:
+         branch: main
+         repo: $REG
 
 notifications:
   slack:
     rooms:
-    - secure: GL9vu5zxVrNzq2phF8sILZZ3UoHHsch0I8YrXuCyD6VXaxaCkzk/CkxOLxlyerkfSDB1KfknqavOrV5vfdQeZMculTWQDbwpo8E+x/ENMMCiYFNHk0yg0HUYres1FLIYka/P4qszW0Op5DkkDVZpZgUOYvlt3x2auB68qh9za8+RXM3fd83lUNoNpSeO8rdqckADCfu+xs6rMODh3dN1k8J4Cf79WeBnb/br9x0vT26H08+0XoOjcbqtQnSqzaLPpK/jwvx74wan+kcfF0ghHRG7Ee/dpPMUAOgHMSt9jlsmYvctq3XZGqERRjTpoHH1jjTzZ3PZt6aK7og/n62ZvgXC01Z1fE0rRisvFJlipyIjQuzNlTxJGxK09SqufUdB2X+u4QzseT7n2a2l7cQiuu02vb7dMVY+OB9bjQ8XHowdArcbrAzojD0zsbgj4leXILb7iZw+1VTU7OI3yr3/+guGtfkgz7GpcaU5553TRFAO/XLtfoJToRxLvhUoeR/qOf2WejnfpDLWS69zMvPRKrZqIPyAOsvmTKzAUQB7EG9zKfyeqzGnlZKeU8qP061OttvYWdbsUL/4a89NbCrIjmX/c6IFTU7CdAUTtRZ1ZryQbYNAWMccMJ3EXHO3lxF15auCHQjha6tyJrcxpkCbLtNW+jA9/64VQCH2EBdsy2Q=
+      - secure: GL9vu5zxVrNzq2phF8sILZZ3UoHHsch0I8YrXuCyD6VXaxaCkzk/CkxOLxlyerkfSDB1KfknqavOrV5vfdQeZMculTWQDbwpo8E+x/ENMMCiYFNHk0yg0HUYres1FLIYka/P4qszW0Op5DkkDVZpZgUOYvlt3x2auB68qh9za8+RXM3fd83lUNoNpSeO8rdqckADCfu+xs6rMODh3dN1k8J4Cf79WeBnb/br9x0vT26H08+0XoOjcbqtQnSqzaLPpK/jwvx74wan+kcfF0ghHRG7Ee/dpPMUAOgHMSt9jlsmYvctq3XZGqERRjTpoHH1jjTzZ3PZt6aK7og/n62ZvgXC01Z1fE0rRisvFJlipyIjQuzNlTxJGxK09SqufUdB2X+u4QzseT7n2a2l7cQiuu02vb7dMVY+OB9bjQ8XHowdArcbrAzojD0zsbgj4leXILb7iZw+1VTU7OI3yr3/+guGtfkgz7GpcaU5553TRFAO/XLtfoJToRxLvhUoeR/qOf2WejnfpDLWS69zMvPRKrZqIPyAOsvmTKzAUQB7EG9zKfyeqzGnlZKeU8qP061OttvYWdbsUL/4a89NbCrIjmX/c6IFTU7CdAUTtRZ1ZryQbYNAWMccMJ3EXHO3lxF15auCHQjha6tyJrcxpkCbLtNW+jA9/64VQCH2EBdsy2Q=
     template:
-    - "%{repository_slug} (%{commit}) : %{message}"
-    - 'Build details: %{build_url}'
+      - "%{repository_slug} (%{commit}) : %{message}"
+      - 'Build details: %{build_url}'
     on_success: always
     on_failure: always

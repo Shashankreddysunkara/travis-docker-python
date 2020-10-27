@@ -1,0 +1,30 @@
+# An * ensures that everything will be ignored
+*.log
+*.db
+*.comf
+*.json
+*.pyc
+*.gz
+*.js
+*.backup
+*.bkp
+
+# whitelist folders/files
+!*.yaml
+!*.gitignore
+!*.md
+!*.gitkeep
+
+# ignore folders
+.storage
+.cloud
+.google.token
+
+# Ignore yaml files
+ip_bans.yaml
+secrets.yaml
+known.devices.yaml
+configuration-sample.yaml
+id_travis_rsa
+*.xml
+.idea/travis-ci-docker.iml
