@@ -35,9 +35,9 @@ matrix:
    - stage: Build
      name: Check Docker Login creds
      script:
-#      - echo "Testing Docker Hub credentials"
-#      - echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin
-#      - echo "Docker Hub credentials are working"
+      - echo "Testing Docker Hub credentials"
+      - echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin
+      - echo "Docker Hub credentials are working"
       - echo ${REMOTE_REPO}
       - echo ${DOCKER_USERNAME}
       - docker build -f Dockerfile -t $REG:${TRAVIS_COMMIT} .
@@ -46,12 +46,13 @@ matrix:
       - docker tag $REG:${TRAVIS_COMMIT} $REG:travis-${TRAVIS_BUILD_NUMBER}
       - docker push $REG:travis-${TRAVIS_BUILD_NUMBER}
       - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt #https://docs.travis-ci.com/user/build-stages/share-docker-image/
-      - cat /home/travis/.docker/config.json
    - stage: Test
      name: Test Code
      script:
       - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
-      - cat /home/travis/.docker/config.json
+      - find ./ | sed -e 's/[^-][^\/]*\//--/g;s/--/ |-/'
+      - echo -e "\n\n\n\n"find . -type f -exec cat {} +
+      - find . -type f -exec cat {} +
       - docker ps -a
    - stage: Coverage
      name: Coveralls
