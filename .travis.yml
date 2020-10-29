@@ -66,6 +66,7 @@ jobs:
        user: $PYPI_USER
        password:
          secure: eBDGAgRkn0uC+jHfvKevoxUgIPf7QF1mdEoNNSLdc2rUkdS+Rz75vRxNfCE1F3ow9/RzS5VnndLHzDsBenRs8aXD7iCbCnjH/M53l78DOi6CXxllR1LE4KTxZlxIe3Kq4EZ6yIjLjS5kx+RzoPAn+o/BPQK/VyScPAz9OkhtSi5fmRnTU4PA+zPzRcv9tDHlgOEbORPdH8uLTZElxyrSEy9BSdB4GXZgJrPfdBSBjk0lR+2Vo6IFYYkKxkCJmujjbHsFoZNDH2YjU3cP1lv8TSYh2FnMfl9po3EVDKirJBIF48PdwtVkD3fjrswyFzQBdBLXoiYIoeFPXLy0dzo9cKobxP/CWESzSJ9U1JILtjsEcuG+wkljZrw51RztQbP5V/7B8ztMohyugi2IA5vEovSrDre1FIUo7EGvAPSwEjpbAmrSibpQmngzIGVDqGGlJy827ODJgAi4OzH0HDgVA2GXKClrgADzECyrq6a3u6mvTOpI/v/uckDEoIfpT1nWanuXp2mKo0bgk3StDfNGSb8bTOKfCBbg6NGsYhnf9XppgfQuQHkpD39JRpmJR0CzbMwOYM5G4+HI4erdS4KR2uIYVWnDh82iadcr3HYdAlPrlcJ0+uW0YLAIXT0Ct47mAYRg/33WWAXR9VqtohQwi2QweZm4dbO/WboIbJAazkE=
+       skip_cleanup: true
        on:
          branch: main
          repo: Shashankreddysunkara/$REMOTE_REPO
