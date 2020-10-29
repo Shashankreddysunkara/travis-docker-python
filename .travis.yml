@@ -45,9 +45,9 @@ jobs:
     name: Test Code
     script:
     - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
-    - find ./ | sed -e 's/[^-][^\/]*\//--/g;s/--/ |-/'
-    - echo -e "\n\n\n\n"find . -type f -exec cat {} +
-    - find . -type f -exec cat {} +
+#    - find ./ | sed -e 's/[^-][^\/]*\//--/g;s/--/ |-/'
+#    - echo -e "\n\n\n\n"find . -type f -exec cat {} +
+#    - find . -type f -exec cat {} +
     - docker ps -a
   - stage: Coverage
     name: Coveralls
