@@ -59,13 +59,13 @@ jobs:
     deploy:
       provider: pypi
       user: ${PYPI_USER}
-      password: Fake007!
+      password: ${PYPI_PASSWORD}
 #        secure: HIRkiwkjX434tZfY42UdLQwfPfloXaBii4k9eCsRLr4y1q7YXv+BH1W3ZPDFpRg220YukiCO/smhFBvhSf6XxCb+XX2cLLQbLB/GxTBFchiuVMlpXv7td/jJL3zCxDKotEEvNcaf+VzmWb4Q9RXr6R8cBuMAy1n14siX6HLNw5A89qj5jV2yXeQ/aYCh4rPDwWvZP5C7AVT84uHS+j1jO4DnF+Rt9f8NCJU7rowfLP7DVQ6TAg+/BasFGGmc1zO/BUr4FP1vqQvJ5sEF73vC0W0Nk0fv+0nl4bxOJXFm4gDA7o8VY9RlRLljuhxgJ8GUgBykMdB6GNQPjrL7FzUkqBD7HAuVlAsL6fbVXWSYYYwyT4yxrbk8N6IWJdLyaDEDZAuvvye62FqIGkKCMJawHmv2JA7mdD888gRe2BMyQ7rYVJNVtbiSvr2wZIh6AS0fJibchUM3kRh3Glnt50Bh+D4vaYQ9BFFsIdeRPUVmLVIYOuVujxUTFzARIw68XwN6X7pG4WrRMuuMmcj3aWFIi4JS+ZHBVF7TtqfSMHyDP9udmWmKOM2JKiqS/gNnKVI/F46a10Bv7OyVBcFlxQpX7ded/JJJ+AZyMq8epkM/CFv9y29aaiROS3uk0ctQo/MMEyYqiqXgdcyGrxSqfniaetSLSm7gY8s9DIbowuu77oc=
       skip_cleanup: true
       skip_existing: true
       on:
         branch: main
-        repo: Shashankreddysunkara/$REMOTE_REPO
+        repo: $GITHUB_ACCOUNT/$REMOTE_REPO
     script: echo -e "$PYPI_USER"
 notifications:
   slack:
