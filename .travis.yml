@@ -88,7 +88,9 @@ jobs:
       - ansible-playbook -i tests/hosts setup.yml
 #      - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
 #      - curl -k https://localhost:6432
-      - curl -v 'https://localhost:5432'
+      - netstat -ln | grep 5432
+      - sudo netstat -tulpn
+      - sudo curl -v 'https://localhost:5432'
   - stage: Coverage
     name: Coveralls
     after_success:
