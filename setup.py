@@ -63,10 +63,10 @@ setup(
         'Programming Language :: Python :: 3.6',
 
         # Database
-        'Database :: PostgreSQL :: 9.2'
+        'Database :: PostgreSQL :: 9.2',
         
         # Configuration management tools
-        'CM tool :: Ansible :: 1.2'
+        'CM tool :: Ansible :: 1.2',
         
         # #CI-CD
         # 'CI-CD :: Jenkins :: 2.249.2'
