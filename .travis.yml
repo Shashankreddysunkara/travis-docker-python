@@ -52,7 +52,8 @@ jobs:
   - stage: Test
     name: Test Code
     script:
-    - docker run $REMOTE_REPO:latest cat hello.txt
+      - echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin
+      - docker run $REMOTE_REPO:latest cat hello.txt
 #    - find ./ | sed -e 's/[^-][^\/]*\//--/g;s/--/ |-/'
 #    - echo -e "\n\n\n\n"find . -type f -exec cat {} +
 #    - find . -type f -exec cat {} +
