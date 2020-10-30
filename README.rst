@@ -24,13 +24,13 @@ This repo consists of travis.yml to build dockerfile for python project.
     :target: https://pypi.python.org/pypi/travis-docker-python
 .. |license|  image:: https://img.shields.io/pypi/l/travis-docker-python.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-docker-python
-.. |description| image:: https://img.shields.io/pypi/description/travis-docker-python.svg?style=flat-square
+.. |description| image:: https://img.shields.io/pypi/d/travis-docker-python.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-docker-python
 .. |author|  image:: https://img.shields.io/pypi/author/travis-docker-python.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-docker-python
-.. |PostgreSQL|  image:: https://img.shields.io/pypi/pyversions/travis-docker-python.svg?style=flat-square
+.. |PostgreSQL|  image:: https://img.shields.io/pypi/P/travis-docker-python.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-docker-python
-.. |Ansible|  image:: https://img.shields.io/pypi/pyversions/travis-docker-python.svg?style=flat-square
+.. |Ansible|  image:: https://img.shields.io/pypi/A/travis-docker-python.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-docker-python
 .. |keywords|  image:: https://img.shields.io/pypi/keywords/travis-docker-python.svg?style=flat-square
     :target: https://pypi.python.org/pypi/travis-docker-python
