@@ -7,7 +7,7 @@ dist: bionic
 os: linux
 services:
 - docker
-- xvfb
+
 #- postgresql
 #- rabbitmq
 env:
@@ -30,6 +30,7 @@ install:
 #  - pip install nose coverage
   - pip install coveralls
   - pip install ansible
+  - pip install tox
 #  - pip install x11vnc
 #  - pip install xvfb
 #  - pip install fluxbox
