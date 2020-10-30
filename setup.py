@@ -23,8 +23,8 @@ setup(
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
     version='0.0.1',
-    PostgreSQL='9.2',
-    Ansible='1.2',
+    # PostgreSQL='9.2',
+    # Ansible='1.2',
 
     description='A sample Python project to demo travisCI Docker python ansible postgresql',
     # long_description=long_description,
@@ -65,11 +65,11 @@ setup(
         'Programming Language :: Python :: 3.6',
 
         # Database
-        'PostgreSQL :: 9.2',
-        
+        # 'PostgreSQL :: 9.2',
+
         # Configuration management tools
-        'Ansible :: 1.2',
-        
+        # 'Ansible :: 1.2',
+
         # #CI-CD
         # 'CI-CD :: Jenkins :: 2.249.2'
 

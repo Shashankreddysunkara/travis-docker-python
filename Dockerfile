@@ -7,8 +7,11 @@ ENV PYTHONUNBUFFERED 1
 #&& echo "* * * * *  /code/manage.py index_deviceprofile >> /var/log/crontab.log 2>&1" >> /etc/crontab \
 #&& crontab /etc/crontab
 ## App setup
-#ADD . /code
-#WORKDIR /code
+RUN mkdir -p /code
+ADD . /code
+WORKDIR /code
 # Requirements installation
 RUN echo "Hello From Dockerfile" > hello.txt
 CMD ["python", "-c", "print(12345)"]
+# Requirements installation
+RUN pip install --cache-dir -r requirements.txt
