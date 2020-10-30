@@ -59,6 +59,8 @@ jobs:
     - docker ps -a
     - ansible --version
 #    - cat /home/travis/virtualenv/python3.6.10/etc/ansible/ansible.cfg
+    - sudo apt-get update -y
+    - sudo apt-get install software-properties-common -y
     - ansible-playbook -i tests/hosts setup.yml
   - stage: Coverage
     name: Coveralls

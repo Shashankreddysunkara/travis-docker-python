@@ -1,7 +1,7 @@
 ---
 # Needed for add-apt-repository
-- name: Install python-software-properties
-  apt: pkg=python-software-properties state=present update-cache=yes
+- name: Install python-software-properties/software-properties-common
+  apt: pkg=software-properties-common state=present update-cache=yes
   become: yes
   tags:
     - apt
