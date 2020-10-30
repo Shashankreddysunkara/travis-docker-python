@@ -1,5 +1,6 @@
 ---
 - name: Install pgbouncer
+  become: yes
   apt: pkg=pgbouncer state=present update-cache=yes
 
 - name: Install pgbouncer config
