@@ -53,12 +53,11 @@ jobs:
   - stage: Build
     name: Check Docker Login creds
     script:
-      - export DISPLAY=${DISPLAY:-:0} # Select screen 0 by default.
-      - xdpyinfo
-      - if which x11vnc &>/dev/null; then ! pgrep -a x11vnc && x11vnc -bg -forever -nopw -quiet -display WAIT$DISPLAY & fi
-      - ! pgrep -a Xvfb && Xvfb $DISPLAY -screen 0 1024x768x16 & sleep 1
-      - if which fluxbox &>/dev/null; then ! pgrep -a fluxbox && fluxbox 2>/dev/null & fi
-      - echo "IP:$(hostname -I) ($(hostname))"
+    - export DISPLAY=${DISPLAY:-:0} # Select screen 0 by default.
+    - xdpyinfo
+    - if which x11vnc &>/dev/null; then ! pgrep -a x11vnc && x11vnc -bg -forever -nopw -quiet -display WAIT$DISPLAY & fi ! pgrep -a Xvfb && Xvfb $DISPLAY -screen 0 1024x768x16 & sleep 1
+    - if which fluxbox &>/dev/null; then ! pgrep -a fluxbox && fluxbox 2>/dev/null & fi
+    - echo "IP:$(hostname -I) ($(hostname))"
     - echo "Testing Docker Hub credentials"
     - echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin
     - echo "Docker Hub credentials are working"
@@ -87,7 +86,7 @@ jobs:
       - ansible-playbook -i tests/hosts setup.yml
 #      - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
 #      - curl -k https://localhost:6432
-      - curl -v https://localhost:5432
+      - curl -v 'https://localhost:5432'
   - stage: Coverage
     name: Coveralls
     after_success:
