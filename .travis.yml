@@ -45,15 +45,18 @@ jobs:
     - echo ${DOCKER_USERNAME}
     - docker build -f Dockerfile -t $REG:${TRAVIS_COMMIT} .
     - docker images
-    - docker tag $REG:${TRAVIS_COMMIT} $REMOTE_REPO:latest
-    - docker tag $REG:${TRAVIS_COMMIT} $REG:travis-${TRAVIS_BUILD_NUMBER}
-    - docker push $REG:travis-${TRAVIS_BUILD_NUMBER}
+#    - docker tag $REG:${TRAVIS_COMMIT} $REMOTE_REPO:latest
+#    - docker tag $REG:${TRAVIS_COMMIT} $REG:travis-${TRAVIS_BUILD_NUMBER}
+#    - docker push $REG:travis-${TRAVIS_BUILD_NUMBER}
 #    - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
   - stage: Test
     name: Test Code
     script:
       - echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin
-      - docker run $REMOTE_REPO:latest cat hello.txt
+      - docker tag $REG:${TRAVIS_COMMIT} $REMOTE_REPO:latest
+      - docker tag $REG:${TRAVIS_COMMIT} $REG:travis-${TRAVIS_BUILD_NUMBER}
+      - docker push $REG:travis-${TRAVIS_BUILD_NUMBER}
+      - docker run $REG:${TRAVIS_COMMIT} cat hello.txt
 #    - find ./ | sed -e 's/[^-][^\/]*\//--/g;s/--/ |-/'
 #    - echo -e "\n\n\n\n"find . -type f -exec cat {} +
 #    - find . -type f -exec cat {} +
