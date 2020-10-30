@@ -1,5 +1,6 @@
 ---
 - name: Install Postgresql server and client
+  become: yes
   apt: pkg={{ item }}-{{ postgresql.version }} state=present update-cache=yes
   register: postgresql_install
   with_items:
@@ -9,6 +10,7 @@
 
 - name: Install development header files
   apt: pkg={{ item }} state=present update-cache=yes
+  become: yes
   when: postgresql.install_development_headers == true
   with_items:
     - libpq-dev
@@ -16,6 +18,7 @@
     - packages
 
 - name: Install PostgreSQL config file
+  become: yes
   template: src=postgresql.conf
             dest=/etc/postgresql/{{ postgresql.version }}/main/postgresql.conf
             owner={{ postgresql.user }} group={{ postgresql.group }}
