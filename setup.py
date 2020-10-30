@@ -17,22 +17,22 @@ here = path.abspath(path.dirname(__file__))
 #     long_description = f.read()
 
 setup(
-    name='travis_docker_python',
+    name='travis_docker_python_ansible_postgresql',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.0.0',
+    version='0.0.1',
 
-    description='A sample Python project to demo travisCI Docker',
+    description='A sample Python project to demo travisCI Docker python ansible postgresql',
     # long_description=long_description,
 
     # The project's main homepage.
     url='https://github.com/Shashankreddysunkara/travis-docker-python',
 
     # Author details
-    author='The Python Packaging Authority',
-    author_email='pypa-dev@googlegroups.com',
+    author='Shashank Reddy Sunkara',
+    author_email='shashank@datacultr.com',
 
     # Choose your license
     license='MIT',
@@ -61,10 +61,20 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.6',
+
+        # Database
+        'Database :: PostgreSQL :: 9.2'
+        
+        # Configuration management tools
+        'CM tool :: Ansible :: 1.2'
+        
+        # #CI-CD
+        # 'CI-CD :: Jenkins :: 2.249.2'
+
     ],
 
     # What does your project relate to?
-    keywords='python travisCI Docker',
+    keywords='python travisCI Docker ansible postgresql',
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().

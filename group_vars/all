@@ -1,0 +1,32 @@
+postgresql:
+  version: 9.2
+  repo: 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
+  install_development_headers: true
+
+  user: postgres
+  group: postgres
+
+  config:
+    shared_buffers: 24MB
+    work_mem: 1MB
+
+    checkpoint_segments: 3
+    checkpoint_completion_target: 0.5
+
+    effective_cache_size: 128MB
+
+pgbouncer:
+  user: postgres
+  group: postgres
+
+  config:
+    database_host: 127.0.0.1
+    database_port: 5432
+
+    listen_addr: 127.0.0.1
+    listen_port: 6432
+
+    user: postgres
+
+    auth_type: md5
+    auth_file: /etc/pgbouncer/userlist.txt
