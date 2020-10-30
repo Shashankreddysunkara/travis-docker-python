@@ -30,7 +30,9 @@ install:
 #  - pip install nose coverage
   - pip install coveralls
   - pip install ansible
-  - pip install x11vnc xvfb fluxbox
+  - pip install x11vnc
+  - pip install xvfb
+  - pip install fluxbox
 #  - pip install docker-py
 
 #script: if [[ -n "$MAKE_TARGET" ]]; then echo "$MAKE_TARGET"; else tox; fi
