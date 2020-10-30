@@ -58,7 +58,7 @@ jobs:
 #    - find . -type f -exec cat {} +
     - docker ps -a
     - ansible --version
-    - cat /home/travis/virtualenv/python3.6.10/etc/ansible/ansible.cfg
+#    - cat /home/travis/virtualenv/python3.6.10/etc/ansible/ansible.cfg
     - ansible-playbook -i tests/hosts setup.yml
   - stage: Coverage
     name: Coveralls

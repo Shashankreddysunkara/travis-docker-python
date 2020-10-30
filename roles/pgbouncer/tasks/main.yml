@@ -1,6 +1,6 @@
 ---
 - name: Install pgbouncer
-  apt: pkg=pgbouncer state=installed update-cache=yes
+  apt: pkg=pgbouncer state=present update-cache=yes
 
 - name: Install pgbouncer config
   action: template src=pgbouncer.ini.j2 dest=/etc/pgbouncer/pgbouncer.ini
