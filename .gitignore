@@ -55,7 +55,7 @@ precomputed
 virtualenv_run
 venv
 .tox
-travis_docker_python.egg-info/
+!travis_docker_python.egg-info/
 __pycache__
 .coverage
 .cache/
