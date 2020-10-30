@@ -17,7 +17,7 @@ here = path.abspath(path.dirname(__file__))
 #     long_description = f.read()
 
 setup(
-    name='travis_docker_python_ansible_postgresql',
+    name='travis_docker_python',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
@@ -64,11 +64,11 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.6',
 
-        # # Database
-        # 'Programming Language :: PostgreSQL :: 9.2',
+        # Database
+        'PostgreSQL :: 9.2',
         
-        # # Configuration management tools
-        # 'Programming Language :: Ansible :: 1.2',
+        # Configuration management tools
+        'Ansible :: 1.2',
         
         # #CI-CD
         # 'CI-CD :: Jenkins :: 2.249.2'
