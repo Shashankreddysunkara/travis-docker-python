@@ -58,6 +58,7 @@ jobs:
 #    - find . -type f -exec cat {} +
     - docker ps -a
     - ansible --version
+    - cat ansible.cfg
     - ansible-playbook -i ansible.host setup.yml
   - stage: Coverage
     name: Coveralls
