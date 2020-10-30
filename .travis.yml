@@ -31,8 +31,8 @@ install:
   - pip install coveralls
   - pip install ansible
 #  - pip install x11vnc
-  - pip install xvfb
-  - pip install fluxbox
+#  - pip install xvfb
+#  - pip install fluxbox
 #  - pip install docker-py
 
 #script: if [[ -n "$MAKE_TARGET" ]]; then echo "$MAKE_TARGET"; else tox; fi
@@ -55,10 +55,10 @@ jobs:
   - stage: Build
     name: Check Docker Login creds
     script:
-    - export DISPLAY=${DISPLAY:-:0} # Select screen 0 by default.
-    - xdpyinfo
-    - pgrep -a Xvfb && Xvfb $DISPLAY -screen 0 1024x768x16 & sleep 1
-    - if which fluxbox &>/dev/null; then ! pgrep -a fluxbox && fluxbox 2>/dev/null & fi
+#    - export DISPLAY=${DISPLAY:-:0} # Select screen 0 by default.
+#    - xdpyinfo
+#    - pgrep -a Xvfb && Xvfb $DISPLAY -screen 0 1024x7fluxbox 2>/dev/null & fi68x16 & sleep 1
+#    - if which fluxbox &>/dev/null; then ! pgrep -a fluxbox &&
     - echo "IP:$(hostname -I) ($(hostname))"
     - echo "Testing Docker Hub credentials"
     - echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin
