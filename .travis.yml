@@ -21,8 +21,8 @@ env:
   - secure: misxC3oVqAAWMZxpVE4GR2Jspp/uLvpnCgKiwhMCmiDHr9bdpcU5TdzlvBp91DXHLmA6doNZ2+Uo57kK8RlLm4zQWlQ+hyJilv7SUcR1DTN9qGZVynD012k2Yb3HS0h5OVoSTXuX2o3cF8Szr92MgPEte1+GnaML8TqOhKZluRvloQTZlmKTuqCX0mT2ezjOqRBI9+MjjxxxzEU81N0DVQbp9yEJsD9iS1vc/iqs0mXC8eiwDz7j2SPomr2eo2KiAg82QOtZvppaoHmzYU0b2N4low5dngfTh54JOJNl31Ovl1TyQRF8u5Y6LlWc9EAWGBXcPOpj1IPFbkuP5blaEjXtEuzunqN/J0LXzOvNMNFhEqdgV7AgxEl5mxP4yLpmRSQCUcMxy6md8fP2zUVp9ksytbi+FEpysucAedokUEMZu0kQMrsvSIZFnkcvIUXwpIrWLk+6CoOYazdV0DHFpGWm42BF+RqJZSOea8gmWpG3oeIiLvZGausbf3W0c+VEncCYsQS+tx+zhspjjqvKaIfssull7Dh40/5iXdRpoVVKmuJaejNxN3epXosM/yyBmN2bIrRLfQRJbZiar1xXRySZQQGvpDCm+rqDEww9rDIWsM2EoyCBGadyRfnV+LWb1jRtmuuqUtIzCb2gJZ2EgsErgrpsCyy9uY826ujGv+E=
   - secure: nIEbAlc/uvHrPNyXQtec7QyUGMTv27PwupDPmO9NS9T2qmSa+4U8sBPHCDADYXBPPIqc4wGaWavPm6wO3qBGkdu0ncanv1ffvFSC20bEvMIgUR2+BW8b0V573+3+1YjEK9zYeA0fEVGrY8VNZFABzj4cQuKAOtT0GmqhBYxEuEPhd468+omJj5yzp725miW1xN/zq0LlRchVPITLDeP9xKdfVVH9iXeD7i6aXlUrL+xObcG9FwRZZo7+eeKox/J3/6DumM4xJQyODQwmGdZIxNUa2/3p9A2imIJs5u3IPW0L8FnZSmmCXDcr7nuie/yKdXil1GydpxSLEaPjR+he4MpuK40clme9Mo0UgmYGhvnQ/jaLW6TMP/MvRN46LBIYKGJOVUVvbSYJ2x/+8ULmPoqql9cvmfbpy0i36WVDOWweUaj4ryceckhF9XS7pY+bncOehZw0qz2uDpV0ljvku8eVPgvKYXVGZCgY4KcQWkXrDglnu0hwuF8tz/cigQVrDOmhaw9AwQn/PuNkSVqs/2PuBZvEb1R2rECZGRiiWePeOZFW12fqPDV7IArqpeJW0wCnDHhmxfnuy0WvD05oA17VNmcVAorqh3U3cIjTDDtItFJFnoyfEDWNigSczTGmTRzQTwMNCK00mPhtzM9FPusQ4N1Jdp7c/1c50UucEAE=
 
-before_install:
-  - "export DISPLAY=:99.0"
+#before_install:
+#  - "export DISPLAY=:99.0"
 #  - "sh -e /etc/init.d/xvfb start"
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
@@ -75,7 +75,7 @@ jobs:
     name: Test Code
     script:
       # # command to run tests, e.g. python setup.py test
-      - python setup.py test
+      - tox
       - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
 #    - find ./ | sed -e 's/[^-][^\/]*\//--/g;s/--/ |-/'
 #    - echo -e "\n\n\n\n"find . -type f -exec cat {} +
@@ -90,7 +90,7 @@ jobs:
 #      - curl -k https://localhost:6432
       - netstat -ln | grep 5432
       - sudo netstat -tulpn
-      - sudo curl -v 'https://localhost:5432'
+#      - sudo curl -v 'https://localhost:5432'
   - stage: Coverage
     name: Coveralls
     after_success:
