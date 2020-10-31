@@ -1,6 +1,6 @@
 language: python
-#python:
-#  - 3.6
+python:
+  - 3.6
 #  - 3.7
 #  - 3.8
 dist: bionic
@@ -76,6 +76,7 @@ jobs:
     name: Test Code
     script:
       # # command to run tests, e.g. python setup.py test
+      - pyenv virtualenv -p python3.6 3.6.10 myenv
       - tox
       - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
 #    - find ./ | sed -e 's/[^-][^\/]*\//--/g;s/--/ |-/'
