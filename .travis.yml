@@ -78,10 +78,10 @@ jobs:
     script:
       # # command to run tests, e.g. python setup.py test
       - ln -s /usr/bin/virtualenv /home/travis/virtualenv/python3.7.6/lib/python3.7/site-packages/virtualenv/virtualenv.py
-      - pyenv virtualenv -p python3.7 3.7.6 py37
-      - pyenv shell py37
-      - python3.7 -m venv venv
-      - source ./venv/bin/activate
+#      - pyenv virtualenv -p python3.7 3.7.6 py37
+#      - pyenv shell py37
+#      - python3.7 -m venv venv
+#      - source ./venv/bin/activate
       - tox
       - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
 #    - find ./ | sed -e 's/[^-][^\/]*\//--/g;s/--/ |-/'
