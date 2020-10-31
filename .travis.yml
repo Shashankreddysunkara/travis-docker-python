@@ -1,7 +1,7 @@
 language: python
 python:
-  - 3.6
-#  - 3.7
+#  - 3.6
+  - 3.7
 #  - 3.8
 dist: bionic
 os: linux
@@ -35,7 +35,7 @@ install:
 #  - pip install x11vnc
 #  - pip install xvfb
 #  - pip install fluxbox
-#  - pip install docker-py
+  - pip install docker-py
 
 #script: if [[ -n "$MAKE_TARGET" ]]; then echo "$MAKE_TARGET"; else tox; fi
 #before_script:
@@ -77,9 +77,10 @@ jobs:
     name: Test Code
     script:
       # # command to run tests, e.g. python setup.py test
-      - pyenv virtualenv -p python3.6 3.6.10 py36
-      - pyenv shell py36
-      - python3.6 -m venv venv
+      - ln -s /usr/bin/virtualenv /home/travis/virtualenv/python3.7.2/lib/python3.6/site-packages/virtualenv/virtualenv.py
+      - pyenv virtualenv -p python3.7 3.7.2 py37
+      - pyenv shell py37
+      - python3.7 -m venv venv
       - source ./venv/bin/activate
       - tox
       - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
