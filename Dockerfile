@@ -12,8 +12,8 @@ ADD . /code
 WORKDIR /code
 # Requirements installation
 RUN echo "Hello From Dockerfile" > hello.txt
-EXPOSE 22 5432 6432
+EXPOSE 22 5432 6432 15672 5672
 #RUN curl -v 'https://localhost:5432'
-CMD ["python", "-c", "print(12345)"]
+#CMD ["python", "-c", "print(12345)"]
 # Requirements installation
 #RUN pip install --cache-dir -r requirements.txt

@@ -13,6 +13,8 @@ services:
 env:
   global:
 #  - PRIV_REPO=travis_docker_pyhton_private
+  - COLOR_RESET='\033[0m'
+  - COLOR_GREEN='\033[0;32m'
   - REMOTE_REPO=travis-docker-python
   - REG=${DOCKER_USERNAME}/${REMOTE_REPO}
   - PYPI_USER=${PYPI_USERNAME}
@@ -29,13 +31,13 @@ install:
 #  - pip install .
 #  - pip install nose coverage
   - pip install coveralls
-  - pip install ansible
-  - pip install tox
+#  - pip install ansible
+#  - pip install tox
 #  - pip install virtualenv
 #  - pip install x11vnc
 #  - pip install xvfb
 #  - pip install fluxbox
-  - pip install docker-py
+#  - pip install docker-py
 
 #script: if [[ -n "$MAKE_TARGET" ]]; then echo "$MAKE_TARGET"; else tox; fi
 #before_script:
@@ -61,13 +63,16 @@ jobs:
 #    - xdpyinfo
 #    - pgrep -a Xvfb && Xvfb $DISPLAY -screen 0 1024x7fluxbox 2>/dev/null & fi68x16 & sleep 1
 #    - if which fluxbox &>/dev/null; then ! pgrep -a fluxbox &&
+#    - chmod 755 bootstrap.sh
+#    - ./bootstrap.sh
     - echo "IP:$(hostname -I) ($(hostname))"
     - echo "Testing Docker Hub credentials"
     - echo "$DOCKER_PASSWORD" | docker login -u=$DOCKER_USERNAME --password-stdin
     - echo "Docker Hub credentials are working"
     - echo ${REMOTE_REPO}
     - echo ${DOCKER_USERNAME}
-    - docker build -f Dockerfile -t $REG:${TRAVIS_COMMIT} .
+    - doocker-compose up -d -t $REG:${TRAVIS_COMMIT} .
+#    - docker build -f Dockerfile -t $REG:${TRAVIS_COMMIT} .
     - docker images
     - docker tag $REG:${TRAVIS_COMMIT} $REMOTE_REPO:latest
     - docker tag $REG:${TRAVIS_COMMIT} $REG:travis-${TRAVIS_BUILD_NUMBER}
@@ -77,26 +82,26 @@ jobs:
     name: Test Code
     script:
       # # command to run tests, e.g. python setup.py test
-      - ln -s /usr/bin/virtualenv /home/travis/virtualenv/python3.7.6/lib/python3.7/site-packages/virtualenv/virtualenv.py
+#      - ln -s /usr/bin/virtualenv /home/travis/virtualenv/python3.7.6/lib/python3.7/site-packages/virtualenv/virtualenv.py
 #      - pyenv virtualenv -p python3.7 3.7.6 py37
 #      - pyenv shell py37
 #      - python3.7 -m venv venv
 #      - source ./venv/bin/activate
-      - tox
-      - docker run $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
+#      - tox
+      - docker run --name DEM $REG:travis-${TRAVIS_BUILD_NUMBER} cat hello.txt
 #    - find ./ | sed -e 's/[^-][^\/]*\//--/g;s/--/ |-/'
 #    - echo -e "\n\n\n\n"find . -type f -exec cat {} +
 #    - find . -type f -exec cat {} +
       - docker ps -a
-      - ansible --version
+#      - ansible --version
 #    - cat /home/travis/virtualenv/python3.6.10/etc/ansible/ansible.cfg
 #    - sudo apt-get update -y
 #    - sudo apt-get install software-properties-common -y
-      - ansible-playbook -i tests/hosts setup.yml
+#      - ansible-playbook -i tests/hosts setup.yml
 #      - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
 #      - curl -k https://localhost:6432
-      - netstat -ln | grep 5432
-      - sudo netstat -tulpn
+#      - netstat -ln | grep 5432
+#      - sudo netstat -tulpn
 #      - sudo curl -v 'https://localhost:5432'
   - stage: Coverage
     name: Coveralls
