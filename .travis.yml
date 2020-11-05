@@ -71,8 +71,8 @@ jobs:
     - echo "Docker Hub credentials are working"
     - echo ${REMOTE_REPO}
     - echo ${DOCKER_USERNAME}
-    - doocker-compose up -d -t $REG:${TRAVIS_COMMIT} .
-#    - docker build -f Dockerfile -t $REG:${TRAVIS_COMMIT} .
+    - doocker-compose up -d
+    - docker build -f Dockerfile -t $REG:${TRAVIS_COMMIT} .
     - docker images
     - docker tag $REG:${TRAVIS_COMMIT} $REMOTE_REPO:latest
     - docker tag $REG:${TRAVIS_COMMIT} $REG:travis-${TRAVIS_BUILD_NUMBER}
